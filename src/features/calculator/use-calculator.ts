@@ -36,10 +36,12 @@ const useCalculator = () => {
     }
 
     setChar(char);
+  };
 
-    if (char === "n!" || char === "sqrt") {
-      return calculateResult();
-    }
+  const setCurrentNumberToNegativeOrPositive = () => {
+    setCurrentNumber(
+      currentNumber[0] === "-" ? currentNumber.replace("-", "") : "-" + currentNumber
+    );
   };
 
   const removeLastNumber = () => {
@@ -98,6 +100,7 @@ const useCalculator = () => {
     clear,
     removeLastNumber,
     calculateResult,
+    setCurrentNumberToNegativeOrPositive,
   };
 };
 export default useCalculator;
