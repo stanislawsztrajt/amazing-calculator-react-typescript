@@ -41,6 +41,7 @@
 body {
   font-family: poppins, sans-serif, monospace;
   color: rgb(240, 235, 235);
+  overflow-x: hidden;
 
   @apply font-semibold
 }
