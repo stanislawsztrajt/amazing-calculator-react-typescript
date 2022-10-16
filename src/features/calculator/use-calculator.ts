@@ -30,7 +30,7 @@ const useCalculator = () => {
       return;
     }
 
-    if (char === 'n!' || char === 'sqrt') {
+    if (char === "n!" || char === "sqrt") {
       calculateResult(char);
     }
 
@@ -58,7 +58,7 @@ const useCalculator = () => {
   const calculateResult: (customChar?: string) => unknown = (customChar) => {
     setCurrentNumber("");
 
-    if (currentChar === "" && customChar === '' && previousNumber === "") {
+    if (currentChar === "" && customChar === "" && previousNumber === "") {
       setPreviousNumber(currentNumber);
       setResult(currentNumber);
       return;
@@ -69,7 +69,9 @@ const useCalculator = () => {
 
       switch (customChar) {
         case "n!":
-          calculatedValue = factorialize(previousNumber !== "" ? +previousNumber : +currentNumber || 0);
+          calculatedValue = factorialize(
+            previousNumber !== "" ? +previousNumber : +currentNumber || 0
+          );
           break;
         case "pow":
           calculatedValue = String(Math.pow(+previousNumber, +currentNumber || 0));
