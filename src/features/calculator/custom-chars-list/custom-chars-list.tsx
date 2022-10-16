@@ -27,14 +27,16 @@ const CustomCharsList: FC<Props> = ({ setCurrentChar }) => {
       <button
         key={char.value}
         onClick={() => setCurrentChar(char.value)}
-        className="w-8 h-8 text-white bg-red-500"
+        className="custom-chars"
       >
-        {char.icon ? <FontAwesomeIcon icon={char.icon as IconProp} /> : <>{char.value}</>}
+        <div className='mt-1'>
+          {char.icon ? <FontAwesomeIcon icon={char.icon as IconProp} /> : <>{char.value}</>}
+        </div>
       </button>
     );
   });
 
-  return <>{charsList}</>;
+  return <div className='flex flex-row gap-4 mb-4'>{charsList}</div>;
 };
 
 export default CustomCharsList;

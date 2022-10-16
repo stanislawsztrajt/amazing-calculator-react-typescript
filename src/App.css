@@ -4,7 +4,126 @@
 @tailwind components;
 @tailwind utilities;
 
+@-webkit-keyframes background-animation {
+  0%{background-position:10% 0%}
+  25%{background-position:91% 0%}
+  50%{background-position: 91% 100%}
+  75%{background-position: 10% 100%}
+  100%{background-position:10% 0%}
+}
+@-moz-keyframes background-animation {
+  0%{background-position:10% 0%}
+  25%{background-position:91% 0%}
+  50%{background-position: 91% 100%}
+  75%{background-position: 10% 100%}
+  100%{background-position:10% 0%}
+}
+@keyframes background-animation { 
+  0%{background-position:10% 0%}
+  25%{background-position:91% 0%}
+  50%{background-position: 91% 100%}
+  75%{background-position: 10% 100%}
+  100%{background-position:10% 0%}
+}
+
+.background-main {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: linear-gradient(130deg, #4e29ac, #200d8a, #1e0285);
+  background-size: 200% 290%;
+  position: absolute;
+  -webkit-animation: background-animation 7s linear infinite;
+  -moz-animation: background-animation 7s linear infinite;
+  animation: background-animation 7s linear infinite;
+}
+
 body {
+  overflow: hidden;
+  margin: 0;
   font-family: poppins, sans-serif, monospace;
+  color: rgb(240, 235, 235);
+
   @apply font-semibold
+}
+
+.number-item, .functional-button, .common-chars, .custom-chars, .result-button, .clear-button, .clear-current-number-button, .clear-last-number-button {
+  @apply text-xl rounded-full w-16 h-16
+}
+
+.number-item:hover, .functional-button:hover, .common-chars:hover, .custom-chars:hover, .result-button:hover, .clear-button:hover, .clear-current-number-button:hover, .clear-last-number-button:hover {
+  transition: .15s;
+  filter: brightness(135%);
+  transform: scale(115%);
+}
+
+@-webkit-keyframes background-animation {
+  0% {
+    transform: scale(115%);
+  }
+  50% {
+    transform: scale(125%);
+
+  }
+  100% {
+    transform: scale(115%);
+  }
+}
+@-moz-keyframes background-animation {
+  0% {
+    transform: scale(115%);
+  }
+  50% {
+    transform: scale(125%);
+
+  }
+  100% {
+    transform: scale(115%);
+  }
+}
+
+@keyframes buttons-focus-animation {
+  0% {
+    transform: scale(115%);
+  }
+  50% {
+    transform: scale(125%);
+
+  }
+  100% {
+    transform: scale(115%);
+  }
+}
+
+.number-item:active, .functional-button:active, .common-chars:active, .custom-chars:active, .result-button:active, .clear-button:active, .clear-current-number-button:active, .clear-last-number-button:active {
+  -webkit-animation: buttons-focus-animation .1s ease infinite;
+  -moz-animation: buttons-focus-animation .1s ease infinite;
+  animation: buttons-focus-animation .1s ease infinite;
+}
+
+.number-item {
+  box-shadow: 0 0 1.5rem #7958d3;
+  @apply bg-white bg-opacity-30
+}
+
+.common-chars, .functional-button {
+  box-shadow: 0 0 1.5rem #5c3bb6;
+  @apply bg-black bg-opacity-30
+}
+
+.custom-chars {
+  box-shadow: 0 0 1.5rem #5c3bb6;
+  @apply bg-black bg-opacity-30
+}
+
+.result-button {
+  box-shadow: 0 0 1.5rem #00E8FF;
+  background-color: #00E8FF;
+  @apply bg-opacity-30
+}
+
+.clear-button {
+  box-shadow: 0 0 1.5rem #aa1e7b;
+  background-color: #aa1e7b;
+  @apply bg-opacity-30
 }

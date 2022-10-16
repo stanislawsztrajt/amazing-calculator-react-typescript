@@ -12,14 +12,16 @@ const CharsList: FC<Props> = ({ setCurrentChar }) => {
       <button
         onClick={() => setCurrentChar(char)}
         key={char}
-        className="w-8 h-8 text-white bg-red-500"
+        className="common-chars"
       >
-        {char}
+        <div className='mt-1'>
+          {char}
+        </div>
       </button>
     );
   });
 
-  return <>{charsList}</>;
+  return <div className='flex flex-col gap-4 ml-4'>{charsList}</div>;
 };
 
 export default CharsList;

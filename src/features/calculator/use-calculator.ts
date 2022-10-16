@@ -10,6 +10,9 @@ const useCalculator = () => {
 
   useEffect(() => {
     if (currentNumber === "") return;
+    if (currentNumber !== "" && previousNumber !== "") {
+      return setCurrentNumber("");
+    }
 
     setPreviousNumber(currentNumber);
     setCurrentNumber("");
@@ -25,6 +28,10 @@ const useCalculator = () => {
   const setCurrentChar = (char: string) => {
     if (currentNumber === "" && previousNumber === "") {
       return;
+    }
+
+    if (char === 'n!' || char === 'sqrt') {
+      calculateResult(char);
     }
 
     if (char === currentChar) {
@@ -48,30 +55,28 @@ const useCalculator = () => {
     setCurrentNumber(currentNumber.slice(0, -1));
   };
 
-  const calculateResult = () => {
+  const calculateResult: (customChar?: string) => unknown = (customChar) => {
     setCurrentNumber("");
 
-    if (currentChar === "" && previousNumber === "") {
+    if (currentChar === "" && customChar === '' && previousNumber === "") {
       setPreviousNumber(currentNumber);
       setResult(currentNumber);
       return;
     }
 
-    if (previousNumber === "") return;
-
-    if (customChars.some((char) => char.value === currentChar)) {
+    if (customChars.some((char) => char.value === customChar)) {
       let calculatedValue = "";
 
-      switch (currentChar) {
+      switch (customChar) {
         case "n!":
-          calculatedValue = factorialize(previousNumber !== "" ? +previousNumber : +currentNumber);
+          calculatedValue = factorialize(previousNumber !== "" ? +previousNumber : +currentNumber || 0);
           break;
         case "pow":
-          calculatedValue = String(Math.pow(+previousNumber, +currentNumber));
+          calculatedValue = String(Math.pow(+previousNumber, +currentNumber || 0));
           break;
         case "sqrt":
           calculatedValue = String(
-            Math.sqrt(previousNumber !== "" ? +previousNumber : +currentNumber)
+            Math.sqrt(previousNumber !== "" ? +previousNumber : +currentNumber || 0)
           );
           break;
         default:
@@ -83,9 +88,9 @@ const useCalculator = () => {
       return;
     }
 
-    const calculatedValue: string = eval(`${previousNumber} ${currentChar} ${currentNumber}`);
-    setPreviousNumber(calculatedValue);
-    setResult(calculatedValue);
+    const calculatedValue: string = eval(`${previousNumber} ${currentChar} ${currentNumber || 0}`);
+    setPreviousNumber(String(calculatedValue));
+    setResult(String(calculatedValue));
   };
 
   return {
