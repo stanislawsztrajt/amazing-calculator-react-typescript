@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { factorialize } from "../../helpers";
 import { customChars } from "./custom-chars-list/custom-chars-list";
 
@@ -9,7 +9,7 @@ const useCalculator = () => {
   const [result, setResult] = useState<string>("");
 
   useEffect(() => {
-    if (currentNumber === "") return;
+    if (currentNumber === "" || currentChar === "") return;
     if (currentNumber !== "" && previousNumber !== "") {
       return setCurrentNumber("");
     }
@@ -19,9 +19,9 @@ const useCalculator = () => {
   }, [currentChar]);
 
   const clear = () => {
+    setChar("");
     setCurrentNumber("");
     setPreviousNumber("");
-    setCurrentChar("");
     setResult("");
   };
 
@@ -55,45 +55,50 @@ const useCalculator = () => {
     setCurrentNumber(currentNumber.slice(0, -1));
   };
 
-  const calculateResult: (customChar?: string) => unknown = (customChar) => {
-    setCurrentNumber("");
+  const calculateResult: (customChar?: string) => unknown = useCallback(
+    (customChar) => {
+      setCurrentNumber("");
 
-    if (currentChar === "" && customChar === "" && previousNumber === "") {
-      setPreviousNumber(currentNumber);
-      setResult(currentNumber);
-      return;
-    }
-
-    if (customChars.some((char) => char.value === customChar)) {
-      let calculatedValue = "";
-
-      switch (customChar) {
-        case "n!":
-          calculatedValue = factorialize(
-            previousNumber !== "" ? +previousNumber : +currentNumber || 0
-          );
-          break;
-        case "pow":
-          calculatedValue = String(Math.pow(+previousNumber, +currentNumber || 0));
-          break;
-        case "sqrt":
-          calculatedValue = String(
-            Math.sqrt(previousNumber !== "" ? +previousNumber : +currentNumber || 0)
-          );
-          break;
-        default:
-          alert("something went wrong");
+      if (currentChar === "" && customChar === "" && previousNumber === "") {
+        setPreviousNumber(currentNumber);
+        setResult(currentNumber);
+        return;
       }
 
-      setPreviousNumber(calculatedValue);
-      setResult(calculatedValue);
-      return;
-    }
+      if (customChars.some((char) => char.value === customChar)) {
+        let calculatedValue = "";
 
-    const calculatedValue: string = eval(`${previousNumber} ${currentChar} ${currentNumber || 0}`);
-    setPreviousNumber(String(calculatedValue));
-    setResult(String(calculatedValue));
-  };
+        switch (customChar) {
+          case "n!":
+            calculatedValue = factorialize(
+              previousNumber !== "" ? +previousNumber : +currentNumber || 0
+            );
+            break;
+          case "pow":
+            calculatedValue = String(Math.pow(+previousNumber, +currentNumber || 0));
+            break;
+          case "sqrt":
+            calculatedValue = String(
+              Math.sqrt(previousNumber !== "" ? +previousNumber : +currentNumber || 0)
+            );
+            break;
+          default:
+            alert("something went wrong");
+        }
+
+        setPreviousNumber(calculatedValue);
+        setResult(calculatedValue);
+        return;
+      }
+
+      const calculatedValue: string = eval(
+        `${String(previousNumber)} ${currentChar} ${String(currentNumber) || "0"}`
+      );
+      setPreviousNumber(String(calculatedValue));
+      setResult(String(calculatedValue));
+    },
+    [currentNumber, previousNumber, currentChar]
+  );
 
   return {
     result,
