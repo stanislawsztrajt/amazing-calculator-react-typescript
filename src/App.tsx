@@ -25,8 +25,8 @@ const App: React.FC = () => {
   return (
     <>
       <div className="background-main"></div>
-      <main className="absolute z-50 flex flex-col items-center justify-center w-screen h-screen">
-        <div className="h-20 p-4 mb-20 text-center w-80 max-w-screen-2xl">
+      <main className="absolute z-50 flex flex-col items-center w-screen h-screen sm:justify-center">
+        <div className="w-screen h-20 p-4 mb-20 text-center sm:w-80 max-w-screen-2xl">
           {isInfinite(+result) ? (
             <div className="text-xl">
               Nie można dzielić przez 0 <br /> lub liczba jest zbyt duża
@@ -50,7 +50,7 @@ const App: React.FC = () => {
             </div>
           )}
         </div>
-        <section className="flex flex-col w-80">
+        <section className="flex flex-col items-center w-screen sm:w-80">
           <div className="flex flex-row gap-4">
             <button className="clear-button" onClick={clear}>
               <div className="mt-1">C</div>

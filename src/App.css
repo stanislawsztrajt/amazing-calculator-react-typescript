@@ -32,15 +32,13 @@
   overflow: hidden;
   background: linear-gradient(130deg, #4e29ac, #200d8a, #1e0285);
   background-size: 200% 290%;
-  position: absolute;
+  position: fixed;
   -webkit-animation: background-animation 7s linear infinite;
   -moz-animation: background-animation 7s linear infinite;
   animation: background-animation 7s linear infinite;
 }
 
 body {
-  overflow: hidden;
-  margin: 0;
   font-family: poppins, sans-serif, monospace;
   color: rgb(240, 235, 235);
 
@@ -48,7 +46,7 @@ body {
 }
 
 .number-item, .functional-button, .common-chars, .custom-chars, .result-button, .clear-button, .clear-current-number-button, .clear-last-number-button {
-  @apply text-xl rounded-full w-16 h-16
+  @apply text-base sm:text-xl rounded-full w-12 h-12 sm:w-16 sm:h-16
 }
 
 .number-item:hover, .functional-button:hover, .common-chars:hover, .custom-chars:hover, .result-button:hover, .clear-button:hover, .clear-current-number-button:hover, .clear-last-number-button:hover {
