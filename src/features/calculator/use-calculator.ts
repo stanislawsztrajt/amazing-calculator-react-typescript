@@ -65,10 +65,10 @@ const useCalculator = () => {
         return;
       }
 
-      if (customChars.some((char) => char.value === customChar)) {
+      if (customChars.some((char) => (char.value === customChar || char.value === currentChar))) {
         let calculatedValue = "";
 
-        switch (customChar) {
+        switch (customChar || currentChar) {
           case "n!":
             calculatedValue = factorialize(
               previousNumber !== "" ? +previousNumber : +currentNumber || 0
